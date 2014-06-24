@@ -79,6 +79,15 @@ int main(int argc, char *argv[])
 
 	// Rendered image
 	int render[IMGW][IMGH];
+	vector<vector<vector<int>>> debugColor;
+	debugColor.resize(IMGW);
+	for(int i = 0; i < IMGW; i++){
+		debugColor[i].resize(IMGH);
+		for(int j = 0; j < IMGH; j++)
+			debugColor[i][j].resize(3);
+	}
+
+
 	int counter = 0;
 
 	// Pixel pos
@@ -106,11 +115,16 @@ int main(int argc, char *argv[])
 			u[1] = py - mCamera.y;
 			u[2] = pz - mCamera.z;
 
+			// debug color
+			debugColor[i][j][0] = (((u[0]/norm(u))+1.0)/2.0)*255;
+			debugColor[i][j][1] = (((u[1]/norm(u))+1.0)/2.0)*255;
+			debugColor[i][j][2] = (((u[2]/norm(u))+1.0)/2.0)*255;
+
 			distToSphere = norm(cross(ba, u)) / norm(u);
 
 			touched = (distToSphere < mSphere.radius);
 			if (touched){
-				render[i][j] = (int)255.0 * distToSphere / mSphere.radius;
+				render[i][j] = (int)255.0 ;//* (1-distToSphere / mSphere.radius);
 			}
 			else
 				render[i][j] = 0;
@@ -121,9 +135,10 @@ int main(int argc, char *argv[])
 	// Write a ppm file
 	FILE *f = fopen("image.ppm", "w");
 	fprintf(f, "P3\n%d %d\n%d\n", IMGW, IMGH, 255);
-	for (int i = 0; i < IMGW; i++){
-		for (int j = 0; j < IMGH; j++){
-			fprintf(f, "%d %d %d ", render[i][j], render[i][j], render[i][j]);
+	for (int i = 0; i < IMGH; i++){
+		for (int j = 0; j < IMGW; j++){
+			//fprintf(f, "%d %d %d ", debugColor[j][i][0], debugColor[j][i][2], debugColor[j][i][1]);
+			fprintf(f, "%d %d %d ", render[j][i], render[j][i], render[j][i]);
 		}
 	}
 
