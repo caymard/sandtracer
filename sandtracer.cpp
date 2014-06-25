@@ -6,8 +6,8 @@
 #include <vector>
 #include <Windows.h>
 
-#define IMGW 640
-#define IMGH 360
+#define IMGW 1440
+#define IMGH 900
 
 using namespace std;
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	Sphere mSphere;
 	mSphere.x = 0;
 	mSphere.y = 0;
-	mSphere.z = -40;
+	mSphere.z = -20;
 	mSphere.radius = 2;
 
 	// Camera definition
@@ -71,59 +71,46 @@ int main(int argc, char *argv[])
 	mCamera.y = 0;
 	mCamera.z = 0;
 	
-	mCamera.d = 0.03;
+	mCamera.d = 0.001;
 	mCamera.w = 0.017777;
 	mCamera.h = 0.01;
 	mCamera.pw = IMGW;
 	mCamera.ph = IMGH;
 
 	// Rendered image
-	int render[IMGW][IMGH];
-	vector<vector<vector<int>>> debugColor;
-	debugColor.resize(IMGW);
-	for(int i = 0; i < IMGW; i++){
-		debugColor[i].resize(IMGH);
-		for(int j = 0; j < IMGH; j++)
-			debugColor[i][j].resize(3);
-	}
-
-
+	cout << "init" << endl;
+	vector<vector<int>> render(IMGW, vector<int>(IMGH, 0));
+	vector<vector<vector<int>>> debugColor(IMGW, vector<vector<int>>(IMGH, vector<int>(3,0)));
 	int counter = 0;
 
 	// Pixel pos
-	double px, py, pz;
+	vector<double> ba(3, 0), u;
+	double normu;
+
+	// cam to sphere vector
+	ba[0] = mSphere.x - mCamera.x;
+	ba[1] = mSphere.y - mCamera.y;
+	ba[2] = mSphere.z - mCamera.z;
 
 	// For each pixel try something cool
+	cout << "render" << endl;
+	#pragma omp parallel for schedule(dynamic,10000) private(u,normu) shared(mSphere,mCamera,debugColor,render)
 	for (int i = 0; i < IMGW; i++){
 		for (int j = 0; j < IMGH; j++){
-			bool touched = false;
-			vector<double> ba(3, 0), u(3, 0);
-			double distToSphere;
-
-			// cam to sphere vector
-			ba[0] = mSphere.x - mCamera.x;
-			ba[1] = mSphere.y - mCamera.y;
-			ba[2] = mSphere.z - mCamera.z;
-
-			// Find pixel position in space
-			pz = mCamera.z - mCamera.d;
-			px = mCamera.x - i*(mCamera.w / mCamera.pw) + mCamera.w / 2.0;
-			py = mCamera.y - j*(mCamera.h / mCamera.ph) + mCamera.h / 2.0;
+			u.resize(3);
 
 			// line direction
-			u[0] = px - mCamera.x;
-			u[1] = py - mCamera.y;
-			u[2] = pz - mCamera.z;
+			u[0] = mCamera.x - i*(mCamera.w / mCamera.pw) + mCamera.w / 2.0 - mCamera.x;
+			u[1] = mCamera.y - j*(mCamera.h / mCamera.ph) + mCamera.h / 2.0 - mCamera.y;
+			u[2] = mCamera.z - mCamera.d - mCamera.z;
 
 			// debug color
-			debugColor[i][j][0] = (((u[0]/norm(u))+1.0)/2.0)*255;
-			debugColor[i][j][1] = (((u[1]/norm(u))+1.0)/2.0)*255;
-			debugColor[i][j][2] = (((u[2]/norm(u))+1.0)/2.0)*255;
+			normu = norm(u);
+			debugColor[i][j][0] = (((u[0]/normu)+1.0)/2.0)*255;
+			debugColor[i][j][1] = (((u[1]/normu)+1.0)/2.0)*255;
+			debugColor[i][j][2] = (((u[2]/normu)+1.0)/2.0)*255;
 
-			distToSphere = norm(cross(ba, u)) / norm(u);
-
-			touched = (distToSphere < mSphere.radius);
-			if (touched){
+			if (norm(cross(ba, u)) / normu < mSphere.radius){
 				render[i][j] = (int)255.0 ;//* (1-distToSphere / mSphere.radius);
 			}
 			else
@@ -133,11 +120,14 @@ int main(int argc, char *argv[])
 
 
 	// Write a ppm file
+	cout << "write" << endl;
 	FILE *f = fopen("image.ppm", "w");
+	FILE *fc = fopen("imageDebug.ppm", "w");
 	fprintf(f, "P3\n%d %d\n%d\n", IMGW, IMGH, 255);
+	fprintf(fc, "P3\n%d %d\n%d\n", IMGW, IMGH, 255);
 	for (int i = 0; i < IMGH; i++){
 		for (int j = 0; j < IMGW; j++){
-			//fprintf(f, "%d %d %d ", debugColor[j][i][0], debugColor[j][i][2], debugColor[j][i][1]);
+			fprintf(fc, "%d %d %d ", debugColor[j][i][0], 255, debugColor[j][i][1]);
 			fprintf(f, "%d %d %d ", render[j][i], render[j][i], render[j][i]);
 		}
 	}
