@@ -1,7 +1,7 @@
 sandtracer
 ==========
 
-A sandbox to discover path tracer rendering
+A sandbox to discover ray tracing rendering and search new ways of optimisation.
 
 
 Compilation
