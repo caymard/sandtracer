@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <ctime>
-#include <Windows.h>
+//#include <Windows.h>
 
 #define IMGW 640
 #define IMGH 360
@@ -163,8 +163,8 @@ int main(int argc, char *argv[])
 
 	// Rendered image
 	cout << "init" << endl;
-	vector<vector<int>> render(IMGW, vector<int>(IMGH, 0));
-	vector<vector<vector<int>>> debugColor(IMGW, vector<vector<int>>(IMGH, vector<int>(3,0)));
+	vector<vector<int> > render(IMGW, vector<int>(IMGH, 0));
+	vector<vector<vector<int> > > debugColor(IMGW, vector<vector<int> >(IMGH, vector<int>(3,0)));
 	int counter = 0;
 
 	// Pixel pos
@@ -207,12 +207,12 @@ int main(int argc, char *argv[])
 				debugColor[i][j][0] = 0;
 				debugColor[i][j][1] = 255;
 				debugColor[i][j][2] = 0;
-				#pragma omp critical
+				/*#pragma omp critical
 				{
 				cout << "n " << mTriangles[t].normal[0] << " " << mTriangles[t].normal[1] << " " << mTriangles[t].normal[2] << " " << endl;
 				cout << "d " << dir[0] << " " << dir[1] << " " << dir[2] << endl;
 				cout << "l " << dot(mTriangles[t].normal, mTriangles[t].v0 - mCamera.pos) << " " << dot(mTriangles[t].normal, dir)*1000.0 << " " << ri << endl;
-				}
+				}*/
 				if( ri >= 0.0 && ri <= 1.0 ) {
 					vector<double> pi = mTriangles[t].v0 + ri*(mTriangles[t].v1 - mTriangles[t].v0);
 					vector<double> u, v, w;
@@ -234,10 +234,10 @@ int main(int argc, char *argv[])
 
 					if( si >= 0.0 && si <= 1.0 && ti >= 0.0 && ti <= 1.0 ) {
 						render[i][j] = (int) 255.0;
-						cout << "YEP ";
+						//cout << "YEP ";
 					}
 					else {
-						cout << "NOPE " << ti << " " << si << ", ";
+						//cout << "NOPE " << ti << " " << si << ", ";
 					}
 				}
 			}
