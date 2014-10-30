@@ -3,104 +3,14 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <ctime>
-//#include <Windows.h>
+
+#include "geometry.h"
 
 #define IMGW 640
 #define IMGH 360
 
 using namespace std;
-
-struct Sphere {
-	// Position
-	double x;
-	double y;
-	double z;
-
-	// Radius
-	double radius;
-};
-
-struct Triangle {
-	// P1
-	vector<double> v0;
-	// P2
-	vector<double> v1;
-	// P3
-	vector<double> v2;
-	// normal
-	vector<double> normal;
-};
-
-struct Camera {
-	// Position
-	vector<double> pos;
-
-	// Sensor
-	// distance from camera center
-	double d;
-	// size
-	double w;
-	double h;
-	// resolution
-	int pw;
-	int ph;
-};
-
-vector<double> operator+(vector<double> a, vector<double> b) {
-	vector<double> c(3,0);
-	c[0] = a[0] + b[0];
-	c[1] = a[1] + b[1];
-	c[2] = a[2] + b[2];
-	return c;
-}
-
-vector<double> operator-(vector<double> a, vector<double> b) {
-	vector<double> c(3,0);
-	c[0] = a[0] - b[0];
-	c[1] = a[1] - b[1];
-	c[2] = a[2] - b[2];
-	return c;
-}
-
-vector<double> operator*(double a, vector<double> b) {
-	vector<double> c(3,0);
-	c[0] = a*b[0];
-	c[1] = a*b[1];
-	c[2] = a*b[2];
-	return c;
-}
-
-vector<double> operator/(vector<double> a, double b) {
-	vector<double> c(3,0);
-	c[0] = a[0] / b;
-	c[1] = a[1] / b;
-	c[2] = a[2] / b;
-	return c;
-}
-
-double dot(vector<double> a, vector<double> b) {
-	return (double) a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
-}
-
-vector<double> cross(vector<double> a, vector<double> b) {
-	vector<double> c(a);
-
-	c[0] = a[1] * b[2] - a[2] * b[1];
-	c[1] = a[2] * b[0] - a[0] * b[2];
-	c[2] = a[0] * b[1] - a[1] * b[0];
-
-	return c;
-}
-
-double norm(vector<double> const &a) {
-	double res=0.0;
-	for (int i = 0; i < a.size(); i++)
-		res += a[i] * a[i];
-
-	return sqrt(res);
-}
 
 vector<double> getNormal(Triangle t) {
 	vector<double> ret(3);
@@ -123,7 +33,7 @@ int main(int argc, char *argv[])
 	mSphere.x = 0;
 	mSphere.y = 0;
 	mSphere.z = -20;
-	mSphere.radius = 0.5;
+	mSphere.radius = 0.25;
 
 	// Triangles definition
 	vector<Triangle> mTriangles(1);
@@ -155,7 +65,7 @@ int main(int argc, char *argv[])
 	mCamera.pos[1] = 0;
 	mCamera.pos[2] = 0;
 	
-	mCamera.d = 0.07;
+	mCamera.d = 0.01;
 	mCamera.w = 0.0017777;
 	mCamera.h = 0.001;
 	mCamera.pw = IMGW;
