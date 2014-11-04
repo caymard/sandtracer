@@ -4,11 +4,11 @@ using namespace Eigen;
 
 class Sphere {
     
-private:
-    Vector3d mPosition;
-    double radius;
-    
 public:
+    Vector3d mPosition;
+    double mRadius;
+    
+
     Sphere(double x, double y, double z, double radius);
     Sphere(Vector3d position, double radius);
     Sphere();
@@ -30,17 +30,19 @@ public:
     
 };
 
-struct Camera {
-	// Position
-	vector<double> pos;
+class Camera {
+    
+public:
+    Vector3d mPosition;
+    double mD;
+    double mW;
+    double mH;
+    double mPW;
+    double mPH;
+    
 
-	// Sensor
-	// distance from camera center
-	double d;
-	// size
-	double w;
-	double h;
-	// resolution
-	int pw;
-	int ph;
+    Camera(Vector3d position, double d, double w, double h,
+            double pw, double ph);
+    Camera(Vector3d position);
+    Camera();
 };
