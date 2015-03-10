@@ -3,6 +3,9 @@ sandtracer
 
 A sandbox to discover ray tracing rendering and search new ways of optimisation.
 
+Dependencies
+============
+*Eigen
 
 Compilation
 ===========
