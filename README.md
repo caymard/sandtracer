@@ -1,6 +1,6 @@
-sandtracer
+sandtracer ![travis](https://travis-ci.org/caymard/sandtracer.svg?branch=master)
 ==========
-![travis](https://travis-ci.org/caymard/sandtracer.svg?branch=master)
+
 A sandbox to discover ray tracing rendering and search new ways of optimisation.
 
 
