@@ -24,8 +24,10 @@ ELSE()
   MESSAGE(STATUS "Boost not found -- disabling the vocabulary tree")
 ENDIF(Boost_FOUND)
 
-INCLUDE_DIRECTORIES("include" ${Eigen_INCLUDE_DIR})
+INCLUDE_DIRECTORIES("include" ${Eigen_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
 
 SET(SOURCES src/sandtracer.cpp src/geometry.cpp include/geometry.h)
 
 ADD_EXECUTABLE(sandtracer ${SOURCES})
+
+TARGET_LINK_LIBRARIES(sandtracer ${Boost_LIBRARIES})

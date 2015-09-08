@@ -6,6 +6,8 @@
 #include <ctime>
 #include <vector>
 
+#include <boost/filesystem.hpp>
+
 #include "geometry.h"
 
 #define IMGW 1280
@@ -15,8 +17,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	boost::filesystem::path testpath("~/dev");
 	int renderTime = clock();
-        
+
 	// Sphere definition
 	Sphere mSphere(0, 0, -20, 0.25);
 
