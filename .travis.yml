@@ -14,7 +14,7 @@ before_install:
 - ./bootstrap.sh --prefix="../boost_1_53_0_install/" --with-libraries=filesystem
 - ./b2 -d0 install
 - cd ..
-- ls -l build_1_53_0_install
+- ls -l boost_1_53_0_install
 - rm -r boost_1_53_0 boost_1_53_0.tar.bz2
 
 
