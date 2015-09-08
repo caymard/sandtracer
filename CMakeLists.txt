@@ -11,6 +11,7 @@ endif()
 find_package(Eigen REQUIRED)
 
 FIND_PACKAGE(Boost 1.53.0 QUIET COMPONENTS system filesystem program_options unit_test_framework)
+MESSAGE(STATUS "Boost ${Boost_LIB_VERSION} ?")
 IF(Boost_FOUND)
    MESSAGE(STATUS "Boost ${Boost_LIB_VERSION} found")
    include_directories(${Boost_INCLUDE_DIRS})
