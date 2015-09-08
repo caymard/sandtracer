@@ -10,7 +10,17 @@ endif()
 
 find_package(Eigen REQUIRED)
 
-INCLUDE_DIRECTORIES("include" ${Eigen_INCLUDE_DIR}) 
+FIND_PACKAGE(Boost 1.53.0 QUIET COMPONENTS system filesystem program_options unit_test_framework)
+IF(Boost_FOUND)
+   MESSAGE(STATUS "Boost ${Boost_LIB_VERSION} found")
+   include_directories(${Boost_INCLUDE_DIRS})
+   link_directories(${Boost_LIBRARIES})
+   add_definitions(${Boost_DEFINITIONS})
+ELSE()
+  MESSAGE(STATUS "Boost not found -- disabling the vocabulary tree")
+ENDIF(Boost_FOUND)
+
+INCLUDE_DIRECTORIES("include" ${Eigen_INCLUDE_DIR})
 
 SET(SOURCES src/sandtracer.cpp src/geometry.cpp include/geometry.h)
 
