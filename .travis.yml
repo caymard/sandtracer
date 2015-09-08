@@ -8,13 +8,14 @@ before_install:
 - sudo apt-get update
 - wget -O boost_1_53_0.tar.bz2 "http://downloads.sourceforge.net/project/boost/boost/1.53.0/boost_1_53_0.tar.bz2?r=http%3A%2F%2Fwww.boost.org%2Fusers%2Fhistory%2Fversion_1_53_0.html&ts=1441701949&use_mirror=netix"
 - mkdir boost_1_53_0
-- mkdir boost_1_53_0_build
-- tar -xvf boost_1_53_0.tar.bz2 boost_1_53_0_build
-- cd boost_1_53_0_build
-- ./bootstrap.sh --prefix="../boost_1_53_0/" --with-libraries=filesystem
+- mkdir boost_1_53_0_install
+- tar -xvf boost_1_53_0.tar.bz2 -C .
+- cd boost_1_53_0
+- ./bootstrap.sh --prefix="../boost_1_53_0_install/" --with-libraries=filesystem
 - ./b2 install
 - cd ..
-- ls -l build_1_53_0
+- ls -l build_1_53_0_install
+- rm -r boost_1_53_0 boost_1_53_0.tar.bz2
 
 
 install:
