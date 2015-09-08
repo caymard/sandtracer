@@ -10,7 +10,7 @@ endif()
 
 find_package(Eigen REQUIRED)
 
-FIND_PACKAGE(Boost 1.53.0 QUIET COMPONENTS system filesystem program_options unit_test_framework)
+FIND_PACKAGE(Boost 1.53.0 COMPONENTS system filesystem program_options unit_test_framework)
 MESSAGE(STATUS "Boost ${Boost_LIB_VERSION} ?")
 MESSAGE(STATUS "Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}")
 MESSAGE(STATUS "Boost_LIBRARIES = ${Boost_LIBRARIES}")
