@@ -29,4 +29,7 @@ addons:
 before_script:
       - mkdir build && cd build && cmake ..
 
+before_install:
+      - gem install coveralls-lcov
+
 script: make
