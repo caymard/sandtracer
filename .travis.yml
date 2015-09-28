@@ -18,7 +18,7 @@ addons:
       - lcov
       - libpng-dev
       - libjpeg8-dev
-      - libtiff5-dev
+      - libtiff4-dev
       - libxxf86vm1
       - libxxf86vm1
       - libxxf86vm-dev
