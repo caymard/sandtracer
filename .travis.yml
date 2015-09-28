@@ -8,8 +8,7 @@ sudo: false
 
 addons:
   apt:
-    source:
-      - boost-latest
+    source: ['boost-latest']
     packages:
       - cmake
       - libeigen3-dev
