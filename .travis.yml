@@ -10,7 +10,7 @@ addons:
   apt:
     sources:
       - boost-latest
-      - ubuntu-toolchain-r/test
+      - ubuntu-toolchain-r
     packages:
       - cmake
       - libeigen3-dev
