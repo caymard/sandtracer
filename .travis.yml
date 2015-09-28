@@ -31,5 +31,7 @@ before_script:
 
 before_install:
       - gem install coveralls-lcov
+install:
+      - export CXX="g++-4.8"
 
 script: make
