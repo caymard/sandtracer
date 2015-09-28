@@ -10,8 +10,8 @@ addons:
   apt:
     packages:
       - cmake
-      - libboost1.55-all-dev
       - libeigen3-dev
+      - libboost1.55-all-dev
 
 before_script: mkdir build && cd build && cmake ..
 
