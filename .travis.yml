@@ -28,10 +28,18 @@ addons:
       - python
 
 before_script:
-      - mkdir build && cd build && cmake ..
+      - cd .. & mkdir build && cd build && cmake ../sandtracer
 
 before_install:
       - gem install coveralls-lcov
+      - git clone --recursive --branch 3.0.0 https://github.com/Itseez/opencv.git opencv3_source
+      - mkdir opencv3_build
+      - mkdir opencv3_install
+      - cd opencv3_build
+      - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/travis/build/caymard/opencv3_install ..
+      - make -j 2
+      - make install
+      - cd ..
 install:
       - export CXX="g++-4.8"
 
