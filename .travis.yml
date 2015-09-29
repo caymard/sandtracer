@@ -36,3 +36,10 @@ install:
       - export CXX="g++-4.8"
 
 script: make
+
+after_success:
+  - ls
+  - mkdir gt_test
+  - git clone --branch dev https://github.com/caymard/SfM_quality_evaluation.git gt_test/
+  - cd gt_test
+  - echo "../`uname -s`-`uname -p`-Release"
