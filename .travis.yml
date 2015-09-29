@@ -25,6 +25,7 @@ addons:
       - x11proto-xf86vidmode-dev
       - libxrandr-dev
       - g++-4.8
+      - python
 
 before_script:
       - mkdir build && cd build && cmake ..

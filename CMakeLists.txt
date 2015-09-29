@@ -33,3 +33,5 @@ SET(SOURCES src/sandtracer.cpp src/geometry.cpp include/geometry.h)
 ADD_EXECUTABLE(sandtracer ${SOURCES})
 
 TARGET_LINK_LIBRARIES(sandtracer ${Boost_LIBRARIES})
+
+MESSAGE(STATUS "${PROJECT_BINARY_DIR}/${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}")
