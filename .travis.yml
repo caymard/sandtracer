@@ -44,10 +44,3 @@ before_script:
       - cmake ../sandtracer
 
 script: make -j 2
-
-after_success:
-  - ls
-  - mkdir gt_test
-  - git clone --branch dev https://github.com/caymard/SfM_quality_evaluation.git gt_test/
-  - cd gt_test
-  - echo "../`uname -s`-`uname -p`-Release"
