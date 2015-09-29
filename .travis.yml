@@ -27,9 +27,6 @@ addons:
       - g++-4.8
       - python
 
-before_script:
-      - cd .. & mkdir build && cd build && cmake ../sandtracer
-
 before_install:
       - gem install coveralls-lcov
       - git clone --recursive --branch 3.0.0 https://github.com/Itseez/opencv.git opencv3_source
@@ -42,6 +39,9 @@ before_install:
       - cd ..
 install:
       - export CXX="g++-4.8"
+
+before_script:
+      - cd .. & mkdir build && cd build && cmake ../sandtracer
 
 script: make
 
