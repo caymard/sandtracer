@@ -46,3 +46,7 @@ before_script:
       - cmake /home/travis/build/caymard/sandtracer
 
 script: make -j 2
+
+cache:
+  directories:
+    - opencv3
