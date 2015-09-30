@@ -49,4 +49,4 @@ script: make -j 4
 
 cache:
   directories:
-    - opencv3
+    - ${TRAVIS_BUILD_DIR}/opencv3
