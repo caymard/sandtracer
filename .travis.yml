@@ -44,7 +44,7 @@ install:
       - export CXX="g++-4.8"
 
 before_script:
-      - cd /home/travis/build/caymard & ls -l
+      - cd ${TRAVIS_BUILD_DIR} & ls -l
       - mkdir build && cd build
       - ls -l
       - cmake /home/travis/build/caymard/sandtracer
