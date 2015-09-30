@@ -45,7 +45,7 @@ before_script:
       - ls -l
       - cmake /home/travis/build/caymard/sandtracer
 
-script: make -j 2
+script: make -j 4
 
 cache:
   directories:
