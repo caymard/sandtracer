@@ -36,6 +36,9 @@ before_install:
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/travis/build/opencv3/install ../source
       - make -j 16
       - make install
+      - cd ${TRAVIS_BUILD_DIR} && ls -l
+      - mkdir download && cd download
+      - wget https://github.com/Itseez/opencv/archive/3.0.0.zip
 install:
       - export CXX="g++-4.8"
 
