@@ -35,7 +35,6 @@ env:
     - OPENCV_INSTALL = ${OPENCV_ROOT}/install
 
 before_install:
-      - gem install coveralls-lcov
       - mkdir --parent ${OPENCV_SOURCE}
       - mkdir --parent ${OPENCV_BUILD}
       - mkdir --parent ${OPENCV_INSTALL}
@@ -44,10 +43,6 @@ before_install:
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${OPENCV_INSTALL} ${OPENCV_SOURCE}
       - make -j 16
       - make install
-      - cd ${TRAVIS_BUILD_DIR}
-      - echo ${TRAVIS_BUILD_DIR} && ls -l
-      - cd download
-      - wget https://github.com/Itseez/opencv/archive/3.0.0.zip
 install:
       - export CXX="g++-4.8"
 
@@ -62,4 +57,3 @@ script: make -j 2
 cache:
   directories:
     - ${TRAVIS_BUILD_DIR}/opencv3/install
-    - ${TRAVIS_BUILD_DIR}/download
