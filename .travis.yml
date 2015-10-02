@@ -50,7 +50,7 @@ before_script:
       - cd ${TRAVIS_BUILD_DIR} & ls -l
       - mkdir build && cd build
       - ls -l
-      - cmake /home/travis/build/caymard/sandtracer
+      - cmake ${TRAVIS_BUILD_DIR}
 
 script: make -j 2
 
