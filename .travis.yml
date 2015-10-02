@@ -29,10 +29,10 @@ addons:
 
 env:
   global:
-    - OPENCV_ROOT = ${TRAVIS_BUILD_DIR}/opencv3
-    - OPENCV_SOURCE = ${OPENCV_ROOT}/source
-    - OPENCV_BUILD = ${OPENCV_ROOT}/build
-    - OPENCV_INSTALL = ${OPENCV_ROOT}/install
+    - OPENCV_ROOT=${TRAVIS_BUILD_DIR}/opencv3
+    - OPENCV_SOURCE=${OPENCV_ROOT}/source
+    - OPENCV_BUILD=${OPENCV_ROOT}/build
+    - OPENCV_INSTALL=${OPENCV_ROOT}/install
 
 before_install:
       - mkdir --parent ${OPENCV_SOURCE}
