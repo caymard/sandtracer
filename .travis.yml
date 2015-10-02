@@ -56,4 +56,4 @@ script: make -j 2
 
 cache:
   directories:
-    - ${TRAVIS_BUILD_DIR}/opencv3/install
+    - ${OPENCV_INSTALL}
