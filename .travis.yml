@@ -27,6 +27,12 @@ addons:
       - g++-4.8
       - python
 
+env:
+  global:
+    - OPENCV_SOURCE = ${TRAVIS_BUILD_DIR}/opencv3/source
+    - OPENCV_BUILD = ${TRAVIS_BUILD_DIR}/opencv3/build
+    - OPENCV_INSTALL = ${TRAVIS_BUILD_DIR}/opencv3/install
+
 before_install:
       - gem install coveralls-lcov
       - cd /home/travis/build
