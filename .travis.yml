@@ -36,19 +36,28 @@ env:
     - OPENCV_INSTALL=${OPENCV_ROOT}/install
 
 before_install:
+      - echo ${OPENCV_ROOT}
+      - echo ${OPENCV_SOURCE}
+      - echo ${OPENCV_BUILD}
+      - echo ${OPENCV_INSTALL}
       - mkdir --parent ${OPENCV_SOURCE}
       - mkdir --parent ${OPENCV_BUILD}
       - mkdir --parent ${OPENCV_INSTALL}
       - git clone --recursive --branch 3.0.0 https://github.com/Itseez/opencv.git ${OPENCV_SOURCE}
       - cd ${OPENCV_BUILD}
+      - pwd
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${OPENCV_INSTALL} ${OPENCV_SOURCE}
+      - pwd
       - make -j 16
 install:
       - cd ${OPENCV_BUILD}
+      - pwd
       - make install
 
 before_script:
+      - echo ${TRAVIS_BUILD_DIR}
       - cd ${TRAVIS_BUILD_DIR} & ls -l
+      - pwd
       - mkdir build && cd build
       - ls -l
       - cmake ${TRAVIS_BUILD_DIR}
