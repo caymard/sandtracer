@@ -40,7 +40,7 @@ before_install:
       - echo ${OPENCV_SOURCE}
       - echo ${OPENCV_BUILD}
       - echo ${OPENCV_INSTALL}
-      - ls -l ${OPENCV_SOURCE}
+      - ls -l ${OPENCV_ROOT}
       - ls -l ${OPENCV_BUILD}
       - ls -l ${OPENCV_INSTALL}
       - mkdir --parent ${OPENCV_SOURCE}
