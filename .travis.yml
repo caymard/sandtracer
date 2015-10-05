@@ -29,6 +29,7 @@ addons:
 
 env:
   global:
+    - CXX="g++-4.8"
     - OPENCV_ROOT=${TRAVIS_BUILD_DIR}/opencv3
     - OPENCV_SOURCE=${OPENCV_ROOT}/source
     - OPENCV_BUILD=${OPENCV_ROOT}/build
@@ -42,9 +43,8 @@ before_install:
       - cd ${OPENCV_BUILD}
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${OPENCV_INSTALL} ${OPENCV_SOURCE}
       - make -j 16
-      - make install
 install:
-      - export CXX="g++-4.8"
+      - make install
 
 before_script:
       - cd ${TRAVIS_BUILD_DIR} & ls -l
