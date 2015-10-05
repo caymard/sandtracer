@@ -44,6 +44,7 @@ before_install:
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${OPENCV_INSTALL} ${OPENCV_SOURCE}
       - make -j 16
 install:
+      - cd ${OPENCV_BUILD}
       - make install
 
 before_script:
