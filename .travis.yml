@@ -56,7 +56,7 @@ install:
 
 before_script:
       - echo ${TRAVIS_BUILD_DIR}
-      - cd ${TRAVIS_BUILD_DIR} & ls -l
+      - cd ${TRAVIS_BUILD_DIR} && ls -l
       - pwd
       - mkdir build && cd build
       - ls -l
