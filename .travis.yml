@@ -56,4 +56,6 @@ script: make -j 2
 
 cache:
   directories:
+    - ${OPENCV_SOURCE}
+    - ${OPENCV_BUIL}
     - ${OPENCV_INSTALL}
