@@ -46,7 +46,7 @@ before_install:
       - mkdir --parent ${OPENCV_SOURCE}
       - mkdir --parent ${OPENCV_BUILD}
       - mkdir --parent ${OPENCV_INSTALL}
-      - git clone --recursive --branch 3.0.0 https://github.com/Itseez/opencv.git ${OPENCV_SOURCE}
+      - if [ ! "$(ls -A install/)" ]; then git clone --recursive --branch 3.0.0 https://github.com/Itseez/opencv.git ${OPENCV_SOURCE}; fi
       - cd ${OPENCV_BUILD}
       - pwd
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${OPENCV_INSTALL} ${OPENCV_SOURCE}
@@ -71,3 +71,4 @@ cache:
   directories:
     - ${OPENCV_BUILD}
     - ${OPENCV_INSTALL}
+    - ${OPENCV_SOURCE}
