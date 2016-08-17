@@ -9,4 +9,4 @@ Compilation
 
 Linux : CMake - makefile - gcc
 
-Windows : CMake - Visual Studio 20XX
+Windows : CMake - Visual Studio 20XXX
